@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Site oficial do aplicativo Caderno de Oração. Organize pedidos, diário espiritual, lembretes, estatísticas, áudios, fotos e backups." />
+  <meta name="author" content="Alexandre Eluf" />
+  <meta name="theme-color" content="#071a33" />
+  <meta property="og:title" content="Caderno de Oração" />
+  <meta property="og:description" content="Organize sua vida de oração com simplicidade, fé e segurança." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/banner.png" />
+  <title>Caderno de Oração</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #071a33;
+      --navy-2: #0d2a4d;
+      --gold: #d4a537;
+      --gold-light: #f1d28a;
+      --cream: #fffaf0;
+      --white: #ffffff;
+      --text: #1d2a38;
+      --muted: #66788a;
+      --border: rgba(7, 26, 51, 0.12);
+      --shadow: 0 20px 60px rgba(7, 26, 51, 0.16);
+      --radius: 24px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Inter", sans-serif; color: var(--text); background: var(--cream); line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+    .topbar { position: sticky; top: 0; z-index: 50; background: rgba(7, 26, 51, 0.94); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,.08); }
+    .nav { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; color: white; font-weight: 800; }
+    .brand img { width: 46px; height: 46px; border-radius: 14px; object-fit: cover; border: 1px solid rgba(212,165,55,.6); }
+    .nav-links { display: flex; align-items: center; gap: 24px; color: rgba(255,255,255,.86); font-size: 14px; font-weight: 600; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .hero { position: relative; overflow: hidden; background: radial-gradient(circle at 10% 20%, rgba(212,165,55,.20), transparent 28%), radial-gradient(circle at 90% 10%, rgba(255,255,255,.08), transparent 25%), linear-gradient(135deg, var(--navy), var(--navy-2)); color: white; padding: 96px 0 84px; }
+    .hero::after { content: ""; position: absolute; inset: auto -15% -40% 45%; height: 420px; background: radial-gradient(circle, rgba(212,165,55,.20), transparent 65%); pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 56px; }
+    .eyebrow { color: var(--gold-light); text-transform: uppercase; letter-spacing: .18em; font-size: 13px; font-weight: 800; margin-bottom: 16px; }
+    h1, h2, h3 { margin-top: 0; line-height: 1.15; }
+    h1 { font-family: "Playfair Display", serif; font-size: clamp(44px, 7vw, 78px); margin-bottom: 20px; }
+    .hero p { font-size: 20px; color: rgba(255,255,255,.82); max-width: 660px; margin: 0 0 30px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 22px; border-radius: 14px; font-weight: 800; transition: .2s ease; border: 1px solid transparent; }
+    .btn-primary { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--navy); box-shadow: 0 12px 30px rgba(212,165,55,.25); }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-outline { color: white; border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.04); }
+    .hero-card { position: relative; z-index: 1; padding: 14px; border-radius: 30px; background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.05)); border: 1px solid rgba(255,255,255,.18); box-shadow: var(--shadow); }
+    .hero-card img { width: 100%; border-radius: 20px; aspect-ratio: 1.65 / 1; object-fit: cover; background: #0a2442; }
+    section { padding: 88px 0; }
+    .section-head { max-width: 720px; margin: 0 auto 46px; text-align: center; }
+    .section-head h2 { font-family: "Playfair Display", serif; font-size: clamp(34px, 5vw, 52px); color: var(--navy); margin-bottom: 16px; }
+    .section-head p { color: var(--muted); font-size: 18px; margin: 0; }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .feature { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; box-shadow: 0 10px 30px rgba(7,26,51,.06); }
+    .feature-icon { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; font-size: 25px; background: rgba(212,165,55,.15); margin-bottom: 18px; }
+    .feature h3 { font-size: 20px; color: var(--navy); margin-bottom: 8px; }
+    .feature p { margin: 0; color: var(--muted); }
+    .showcase { background: white; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .screens { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; align-items: end; }
+    .screen { overflow: hidden; border-radius: 22px; background: #f0f4f7; border: 1px solid var(--border); box-shadow: 0 16px 40px rgba(7,26,51,.10); }
+    .screen img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; }
+    .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 54px; align-items: center; }
+    .mission-card { min-height: 380px; border-radius: 32px; background: linear-gradient(rgba(7,26,51,.45), rgba(7,26,51,.82)), url("assets/banner.png") center/cover no-repeat; box-shadow: var(--shadow); }
+    .mission-copy h2 { font-family: "Playfair Display", serif; color: var(--navy); font-size: clamp(34px, 5vw, 52px); margin-bottom: 18px; }
+    .mission-copy p { font-size: 18px; color: var(--muted); margin-bottom: 18px; }
+    .highlight { padding: 18px 20px; border-left: 4px solid var(--gold); background: rgba(212,165,55,.10); border-radius: 0 16px 16px 0; color: var(--navy); font-weight: 700; }
+    .faq { max-width: 840px; margin: 0 auto; display: grid; gap: 14px; }
+    details { background: white; border: 1px solid var(--border); border-radius: 18px; padding: 20px 22px; }
+    summary { cursor: pointer; font-weight: 800; color: var(--navy); }
+    details p { color: var(--muted); margin: 12px 0 0; }
+    .cta { padding: 70px 0; color: white; background: linear-gradient(135deg, var(--navy-2), var(--navy)); text-align: center; }
+    .cta h2 { font-family: "Playfair Display", serif; font-size: clamp(34px, 5vw, 52px); margin-bottom: 14px; }
+    .cta p { color: rgba(255,255,255,.78); font-size: 18px; margin: 0 auto 26px; max-width: 700px; }
+    footer { background: #041224; color: rgba(255,255,255,.72); padding: 34px 0; font-size: 14px; }
+    .footer-grid { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    .footer-links a:hover { color: var(--gold-light); }
+    @media (max-width: 960px) {
+      .hero-grid, .mission-grid { grid-template-columns: 1fr; }
+      .features { grid-template-columns: repeat(2, 1fr); }
+      .screens { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .hero { padding-top: 72px; }
+    }
+    @media (max-width: 640px) {
+      section { padding: 68px 0; }
+      .features, .screens { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .hero p { font-size: 18px; }
+      .mission-card { min-height: 260px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#inicio" class="brand">
+        <img src="assets/icon.png" alt="Ícone do Caderno de Oração" />
+        <span>Caderno de Oração</span>
+      </a>
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#recursos">Recursos</a>
+        <a href="#telas">Telas</a>
+        <a href="#missao">Nossa missão</a>
+        <a href="#faq">Dúvidas</a>
+        <a href="privacidade.html">Privacidade</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Fé, cuidado e esperança</div>
+          <h1>Organize sua vida de oração todos os dias.</h1>
+          <p>Cadastre pedidos, acompanhe respostas, registre testemunhos, grave áudios, adicione fotos e fortaleça sua caminhada espiritual em um único aplicativo.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#" aria-label="Baixar na Google Play">Em breve na Google Play</a>
+            <a class="btn btn-outline" href="#recursos">Conhecer recursos</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <img src="assets/banner.png" alt="Banner do aplicativo Caderno de Oração" />
+        </div>
+      </div>
+    </section>
+    <section id="recursos">
+      <div class="container">
+        <div class="section-head">
+          <h2>Tudo o que você precisa para cuidar da sua rotina de oração</h2>
+          <p>Recursos simples, completos e pensados para uso pessoal, grupos, igrejas e ministérios.</p>
+        </div>
+        <div class="features">
+          <article class="feature"><div class="feature-icon">🙏</div><h3>Pedidos de oração</h3><p>Cadastre pedidos ilimitados com nome, telefone, categoria, foto, áudio e anotações.</p></article>
+          <article class="feature"><div class="feature-icon">📖</div><h3>Diário espiritual</h3><p>Registre reflexões, gratidão, estudos e testemunhos importantes da sua caminhada.</p></article>
+          <article class="feature"><div class="feature-icon">🔔</div><h3>Lembretes personalizados</h3><p>Escolha os dias da semana e o melhor horário para manter sua rotina de oração.</p></article>
+          <article class="feature"><div class="feature-icon">📊</div><h3>Estatísticas detalhadas</h3><p>Acompanhe pedidos urgentes, respondidos, em oração e organizados por categoria.</p></article>
+          <article class="feature"><div class="feature-icon">💾</div><h3>Backup e exportação</h3><p>Crie backups e exporte informações em PDF e Excel quando precisar.</p></article>
+          <article class="feature"><div class="feature-icon">🌎</div><h3>Multidiomas</h3><p>Use o aplicativo em Português, Inglês ou Espanhol com troca instantânea.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="showcase" id="telas">
+      <div class="container">
+        <div class="section-head"><h2>Conheça o aplicativo</h2><p>Uma interface acolhedora, organizada e fácil de usar.</p></div>
+        <div class="screens">
+          <div class="screen"><img src="assets/screenshot1.png" alt="Tela Central" /></div>
+          <div class="screen"><img src="assets/screenshot2.png" alt="Diário espiritual" /></div>
+          <div class="screen"><img src="assets/screenshot3.png" alt="Lembrete diário" /></div>
+          <div class="screen"><img src="assets/screenshot4.png" alt="Estatísticas" /></div>
+          <div class="screen"><img src="assets/screenshot5.png" alt="Perfil e recursos" /></div>
+        </div>
+      </div>
+    </section>
+    <section id="missao">
+      <div class="container mission-grid">
+        <div class="mission-card" role="img" aria-label="Identidade visual do Caderno de Oração"></div>
+        <div class="mission-copy">
+          <div class="eyebrow" style="color: var(--gold);">Nossa missão</div>
+          <h2>Preservar orações, histórias e testemunhos.</h2>
+          <p>Acreditamos que uma vida de oração organizada fortalece a fé, aproxima pessoas de Deus e preserva momentos que não devem ser esquecidos.</p>
+          <p>O Caderno de Oração nasceu para ser uma ferramenta simples, acolhedora e segura, ajudando cada pessoa a acompanhar sua caminhada espiritual todos os dias.</p>
+          <div class="highlight">Ore. Confie. Deus ouve. Milagres acontecem.</div>
+        </div>
+      </div>
+    </section>
+    <section id="faq">
+      <div class="container">
+        <div class="section-head"><h2>Perguntas frequentes</h2><p>Respostas rápidas para as principais dúvidas.</p></div>
+        <div class="faq">
+          <details><summary>Meus dados ficam seguros?</summary><p>Os registros permanecem no aparelho e só são exportados, compartilhados ou salvos em backup quando você escolhe fazer isso.</p></details>
+          <details><summary>O aplicativo funciona sem internet?</summary><p>Sim. Os principais recursos funcionam offline, incluindo pedidos, diário, estatísticas e organização dos dados.</p></details>
+          <details><summary>Posso fazer backup?</summary><p>Sim. O aplicativo permite criar backup e restaurar seus dados posteriormente.</p></details>
+          <details><summary>É possível exportar os dados?</summary><p>Sim. Você pode exportar informações em PDF e Excel diretamente pelo aplicativo.</p></details>
+          <details><summary>Quais idiomas estão disponíveis?</summary><p>Português, Inglês e Espanhol.</p></details>
+        </div>
+      </div>
+    </section>
+    <section class="cta">
+      <div class="container">
+        <h2>Leve sua rotina de oração com você.</h2>
+        <p>O Caderno de Oração foi criado para ajudar você a cuidar de cada pedido com mais organização, constância e fé.</p>
+        <a class="btn btn-primary" href="#">Em breve na Google Play</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container footer-grid">
+      <div>© 2026 Alexandre Eluf. Todos os direitos reservados.</div>
+      <div class="footer-links">
+        <a href="privacidade.html">Política de Privacidade</a>
+        <a href="termos.html">Termos de Uso</a>
+        <a href="contato.html">Contato</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
